@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-
+import { useContext } from "react";
+import { CartContext } from "../context/CartContext";
 function Product() {
   const { id } = useParams();
-
+const { addToCart } = useContext(CartContext);
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -41,6 +42,12 @@ function Product() {
           <p>{product.description}</p>
 
           <h2>${product.price}</h2>
+          <button
+  className="cart-btn"
+  onClick={() => addToCart(product)}
+>
+  Add to Cart
+</button>
 
           <p>
             <strong>Category:</strong>{" "}
