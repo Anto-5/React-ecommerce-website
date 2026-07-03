@@ -34,13 +34,49 @@ function CartProvider({ children }) {
 
   };
 
+  const increaseQuantity = (id) => {
+
+    setCart(
+      cart.map(item =>
+        item.id === id
+          ? { ...item, quantity: item.quantity + 1 }
+          : item
+      )
+    );
+
+  };
+
+  const decreaseQuantity = (id) => {
+
+    setCart(
+      cart
+        .map(item =>
+          item.id === id
+            ? { ...item, quantity: item.quantity - 1 }
+            : item
+        )
+        .filter(item => item.quantity > 0)
+    );
+
+  };
+
+  const removeItem = (id) => {
+
+    setCart(
+      cart.filter(item => item.id !== id)
+    );
+
+  };
+
   return (
 
     <CartContext.Provider
       value={{
         cart,
         addToCart,
-        setCart
+        increaseQuantity,
+        decreaseQuantity,
+        removeItem
       }}
     >
 
